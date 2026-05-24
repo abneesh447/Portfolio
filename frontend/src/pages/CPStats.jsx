@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend } from 'recharts';
-import axios from 'axios';
+import axios from '../utils/api';
 import { SiLeetcode, SiCodeforces, SiCodechef } from 'react-icons/si';
 import { Star } from 'lucide-react';
 

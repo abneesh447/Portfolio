@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../../utils/api';
 import { motion } from 'framer-motion';
 import { Upload, File } from 'lucide-react';
 import toast from 'react-hot-toast';

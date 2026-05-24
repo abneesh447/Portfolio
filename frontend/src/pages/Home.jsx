@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Send, Briefcase, GraduationCap } from 'lucide-react';
-import axios from 'axios';
+import axios from '../utils/api';
 import IconRenderer from '../utils/IconRenderer';
 import { SkeletonCard } from '../components/Skeleton';
 import toast from 'react-hot-toast';

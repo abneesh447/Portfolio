@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../utils/api';
 
 const Overview = () => {
   const [stats, setStats] = useState({ projects: 0, messages: 0 });

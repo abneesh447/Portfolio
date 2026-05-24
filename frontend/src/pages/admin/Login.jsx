@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Lock } from 'lucide-react';
-import axios from 'axios';
+import axios from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
