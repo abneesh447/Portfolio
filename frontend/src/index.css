@@ -193,6 +193,9 @@ input:focus, textarea:focus {
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
   .hero-container {
     justify-content: center !important;
     text-align: center !important;

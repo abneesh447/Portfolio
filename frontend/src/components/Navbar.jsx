@@ -30,7 +30,7 @@ const Navbar = () => {
       top: 0,
       width: '100%',
       zIndex: 1000,
-      padding: isScrolled ? '1rem 2rem' : '1.5rem 2rem',
+      padding: isScrolled ? '1rem 0' : '1.5rem 0',
       background: isScrolled ? 'var(--glass-bg)' : 'transparent',
       backdropFilter: isScrolled ? 'blur(12px)' : 'none',
       borderBottom: isScrolled ? '1px solid var(--glass-border)' : 'none',
