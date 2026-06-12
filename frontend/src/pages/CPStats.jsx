@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend } from 'recharts';
 import axios from '../utils/api';
 import { SiLeetcode, SiCodeforces, SiCodechef } from 'react-icons/si';
@@ -87,38 +86,45 @@ const CPStats = () => {
   const getActiveChart = () => {
     if (!activeChart) {
       return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-          <h3 style={{ textAlign: 'center', marginBottom: '1rem' }}>Questions Solved (Difficulty)</h3>
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie 
-                data={pieData} 
-                innerRadius={80} 
-                outerRadius={120} 
-                paddingAngle={5} 
-                dataKey="value"
-                startAngle={90}
-                endAngle={-270}
-              >
-                {pieData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <RechartsTooltip contentStyle={{ backgroundColor: 'rgba(30, 30, 30, 0.9)', border: '1px solid var(--glass-border)', borderRadius: '8px' }} itemStyle={{ color: 'var(--text-primary)' }} />
-              <Legend 
-                verticalAlign="bottom" 
-                height={36} 
-                content={() => (
-                  <ul style={{ listStyle: 'none', display: 'flex', justifyContent: 'center', gap: '1.5rem', padding: 0, margin: 0 }}>
-                    <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#00b8a3' }}><span style={{ width: 12, height: 12, backgroundColor: '#00b8a3', display: 'inline-block' }}></span>Easy</li>
-                    <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ffc01e' }}><span style={{ width: 12, height: 12, backgroundColor: '#ffc01e', display: 'inline-block' }}></span>Medium</li>
-                    <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ff375f' }}><span style={{ width: 12, height: 12, backgroundColor: '#ff375f', display: 'inline-block' }}></span>Hard</li>
-                  </ul>
-                )}
-              />
-            </PieChart>
-          </ResponsiveContainer>
-        </motion.div>
+        <div className="h-full flex flex-col">
+          <h3 className="text-xl font-bold text-center mb-6">Questions Solved (Difficulty)</h3>
+          <div className="flex-grow min-h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie 
+                  data={pieData} 
+                  innerRadius={70} 
+                  outerRadius={110} 
+                  paddingAngle={5} 
+                  dataKey="value"
+                  startAngle={90}
+                  endAngle={-270}
+                  stroke="var(--color-ink)"
+                  strokeWidth={2}
+                >
+                  {pieData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <RechartsTooltip 
+                  contentStyle={{ backgroundColor: 'var(--color-cream)', border: '2px solid var(--color-ink)', borderRadius: '12px', boxShadow: '4px 4px 0 0 var(--color-ink)' }} 
+                  itemStyle={{ color: 'var(--color-ink)', fontWeight: 'bold' }} 
+                />
+                <Legend 
+                  verticalAlign="bottom" 
+                  height={36} 
+                  content={() => (
+                    <ul className="flex justify-center gap-6 font-bold">
+                      <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full border-2 border-[var(--color-ink)]" style={{backgroundColor: '#00b8a3'}}></div>Easy</li>
+                      <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full border-2 border-[var(--color-ink)]" style={{backgroundColor: '#ffc01e'}}></div>Medium</li>
+                      <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full border-2 border-[var(--color-ink)]" style={{backgroundColor: '#ff375f'}}></div>Hard</li>
+                    </ul>
+                  )}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       );
     }
 
@@ -129,9 +135,9 @@ const CPStats = () => {
     const CustomTooltip = ({ active, payload, label }) => {
       if (active && payload && payload.length) {
         return (
-          <div style={{ backgroundColor: 'rgba(30, 30, 30, 0.95)', border: '1px solid var(--glass-border)', borderRadius: '8px', padding: '12px' }}>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '4px', fontSize: '0.85rem' }}>{label}</p>
-            <p style={{ color: payload[0].color, fontWeight: 'bold', fontSize: '1.1rem', margin: 0 }}>
+          <div className="bg-[var(--color-cream)] border-2 border-[var(--color-ink)] rounded-xl p-3 shadow-[4px_4px_0_0_var(--color-ink)]">
+            <p className="text-sm opacity-80 mb-1 font-bold">{label}</p>
+            <p className="text-lg font-black m-0" style={{ color: payload[0].color }}>
               {`Rating: ${payload[0].value}`}
             </p>
           </div>
@@ -141,18 +147,20 @@ const CPStats = () => {
     };
 
     return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <h3 style={{ textAlign: 'center', marginBottom: '1rem', textTransform: 'capitalize' }}>{activeChart} Rating</h3>
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={platformData.ratingHistory} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-            <XAxis dataKey="contest" stroke="var(--text-secondary)" tick={{fontSize: 12}} />
-            <YAxis stroke="var(--text-secondary)" domain={['dataMin - 100', 'dataMax + 100']} />
-            <RechartsTooltip content={<CustomTooltip />} cursor={{ stroke: 'var(--text-secondary)', strokeWidth: 1, strokeDasharray: '5 5' }} />
-            <Line type="monotone" dataKey="rating" stroke={color} strokeWidth={3} dot={{ r: 4, fill: color }} activeDot={{ r: 8 }} />
-          </LineChart>
-        </ResponsiveContainer>
-      </motion.div>
+      <div className="h-full flex flex-col">
+        <h3 className="text-xl font-bold text-center mb-6 capitalize">{activeChart} Rating</h3>
+        <div className="flex-grow min-h-[300px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={platformData.ratingHistory} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)" />
+              <XAxis dataKey="contest" stroke="var(--color-ink)" tick={{fontSize: 12, fontWeight: 'bold'}} />
+              <YAxis stroke="var(--color-ink)" domain={['dataMin - 100', 'dataMax + 100']} tick={{fontWeight: 'bold'}} />
+              <RechartsTooltip content={<CustomTooltip />} cursor={{ stroke: 'var(--color-ink)', strokeWidth: 2, strokeDasharray: '5 5' }} />
+              <Line type="stepAfter" dataKey="rating" stroke={color} strokeWidth={4} dot={{ r: 5, fill: color, stroke: 'var(--color-ink)', strokeWidth: 2 }} activeDot={{ r: 8, stroke: 'var(--color-ink)', strokeWidth: 2 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
     );
   };
 
@@ -175,99 +183,101 @@ const CPStats = () => {
   const codechefStarCount = getCodechefStars();
 
   return (
-    <div style={{ paddingTop: '100px', minHeight: '100vh', paddingBottom: '4rem' }}>
-      <div className="container" style={{ maxWidth: '1200px' }}>
-        <h1 className="section-title">Competitive Programming</h1>
-        
-        {/* Profile Links */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-          <a href={`https://leetcode.com/${handles.leetcode}`} target="_blank" rel="noreferrer" className="glass-card" style={{ padding: '1rem 2rem', display: 'flex', alignItems: 'center', gap: '1rem', transition: 'transform 0.3s' }}>
-            <SiLeetcode size={32} color="#FFA116" />
-            <span style={{ fontWeight: 600 }}>LeetCode</span>
-          </a>
-          <a href={`https://codeforces.com/profile/${handles.codeforces}`} target="_blank" rel="noreferrer" className="glass-card" style={{ padding: '1rem 2rem', display: 'flex', alignItems: 'center', gap: '1rem', transition: 'transform 0.3s' }}>
-            <SiCodeforces size={32} color="#1F8ACB" />
-            <span style={{ fontWeight: 600 }}>Codeforces</span>
-          </a>
-          <a href={`https://www.codechef.com/users/${handles.codechef}`} target="_blank" rel="noreferrer" className="glass-card" style={{ padding: '1rem 2rem', display: 'flex', alignItems: 'center', gap: '1rem', transition: 'transform 0.3s' }}>
-            <SiCodechef size={32} color="#D69E2E" />
-            <span style={{ fontWeight: 600 }}>CodeChef</span>
-          </a>
-        </motion.div>
-
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', alignItems: 'stretch' }}>
-          
-          {/* Left Column: Stats Boxes */}
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} style={{ flex: '1 1 400px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            
-            {/* Total Combined Questions */}
-            <div className="glass-card" style={{ textAlign: 'center', padding: '3rem 2rem', flex: '0 0 auto' }}>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem', fontSize: '1.1rem' }}>Total Questions Solved (Combined)</p>
-              <h2 style={{ fontSize: '4rem', color: 'var(--accent-color)', lineHeight: 1 }}>{totalCombinedSolved}</h2>
-            </div>
-
-            {/* Platform Ratings Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '1.5rem', flex: '1 1 auto' }}>
-              
-              <div 
-                className="glass-card" 
-                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '1.5rem 1rem', cursor: 'pointer', transition: 'all 0.3s', borderColor: (hoveredPlatform === 'leetcode' || clickedPlatform === 'leetcode') ? '#FFA116' : 'var(--glass-border)' }}
-                onMouseEnter={() => setHoveredPlatform('leetcode')}
-                onMouseLeave={() => setHoveredPlatform(null)}
-                onClick={() => setClickedPlatform(clickedPlatform === 'leetcode' ? null : 'leetcode')}
-              >
-                <SiLeetcode size={32} color="#FFA116" style={{ marginBottom: '1rem' }} />
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>LeetCode Rating</p>
-                <h3 style={{ fontSize: '1.8rem', color: '#FFA116' }}>{stats.leetcode.rating}</h3>
-              </div>
-              
-              <div 
-                className="glass-card" 
-                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '1.5rem 1rem', cursor: 'pointer', transition: 'all 0.3s', borderColor: (hoveredPlatform === 'codeforces' || clickedPlatform === 'codeforces') ? '#1F8ACB' : 'var(--glass-border)' }}
-                onMouseEnter={() => setHoveredPlatform('codeforces')}
-                onMouseLeave={() => setHoveredPlatform(null)}
-                onClick={() => setClickedPlatform(clickedPlatform === 'codeforces' ? null : 'codeforces')}
-              >
-                <SiCodeforces size={32} color="#1F8ACB" style={{ marginBottom: '1rem' }} />
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Codeforces Rating</p>
-                <h3 style={{ fontSize: '1.8rem', color: '#1F8ACB' }}>{stats.codeforces.rating}</h3>
-              </div>
-
-              <div 
-                className="glass-card" 
-                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '1.5rem 1rem', cursor: 'pointer', transition: 'all 0.3s', borderColor: (hoveredPlatform === 'codechef' || clickedPlatform === 'codechef') ? '#D69E2E' : 'var(--glass-border)' }}
-                onMouseEnter={() => setHoveredPlatform('codechef')}
-                onMouseLeave={() => setHoveredPlatform(null)}
-                onClick={() => setClickedPlatform(clickedPlatform === 'codechef' ? null : 'codechef')}
-              >
-                <SiCodechef size={32} color="#D69E2E" style={{ marginBottom: '1rem' }} />
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>CodeChef</p>
-                <h3 style={{ fontSize: '1.8rem', color: '#D69E2E', marginBottom: '0.5rem' }}>
-                  {stats.codechef.rating}
-                </h3>
-                <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
-                  {Array.from({ length: Math.max(5, codechefStarCount) }).map((_, i) => (
-                    <Star 
-                      key={i} 
-                      size={18} 
-                      fill={i < codechefStarCount ? '#D69E2E' : 'transparent'} 
-                      color={i < codechefStarCount ? '#D69E2E' : 'var(--text-secondary)'} 
-                    />
-                  ))}
-                </div>
-              </div>
-
-            </div>
-          </motion.div>
-
-          {/* Right Column: Dynamic Chart */}
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="glass-card" style={{ flex: '2 1 500px', display: 'flex', flexDirection: 'column', minHeight: '450px' }}>
-            <AnimatePresence mode="wait">
-              {getActiveChart()}
-            </AnimatePresence>
-          </motion.div>
-
+    <div className="max-w-6xl mx-auto px-6">
+      <div className="pt-8 pb-16 text-left">
+        <div className="chip bg-white text-ink mb-4">
+          🏆 competitive programming
         </div>
+        <h1 className="text-5xl md:text-7xl font-black mb-6">
+          competitive <span className="half-highlight-yellow">programming</span>
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-muted-foreground text-gray-800">
+          A snapshot of my CP grind across the three big platforms. Numbers go up and down — but the muscle memory only grows.
+        </p>
+      </div>
+
+      {/* Profile Links */}
+      <div className="flex flex-wrap justify-start gap-6 mb-16">
+        <a href={`https://leetcode.com/${handles.leetcode}`} target="_blank" rel="noreferrer" className="sticker sticker-hover bg-white px-6 py-4 flex items-center gap-3 rotate-1">
+          <SiLeetcode size={32} color="#FFA116" />
+          <span className="font-bold text-xl">LeetCode</span>
+        </a>
+        <a href={`https://codeforces.com/profile/${handles.codeforces}`} target="_blank" rel="noreferrer" className="sticker sticker-hover bg-white px-6 py-4 flex items-center gap-3 -rotate-1">
+          <SiCodeforces size={32} color="#1F8ACB" />
+          <span className="font-bold text-xl">Codeforces</span>
+        </a>
+        <a href={`https://www.codechef.com/users/${handles.codechef}`} target="_blank" rel="noreferrer" className="sticker sticker-hover bg-white px-6 py-4 flex items-center gap-3 rotate-2">
+          <SiCodechef size={32} color="#D69E2E" />
+          <span className="font-bold text-xl">CodeChef</span>
+        </a>
+      </div>
+
+      <div className="flex flex-col lg:flex-row gap-8 mb-20">
+        
+        {/* Left Column: Stats Boxes */}
+        <div className="flex-1 flex flex-col gap-6">
+          
+          {/* Total Combined Questions */}
+          <div className="sticker bg-lemon text-center p-8 flex-none -rotate-1">
+            <p className="font-bold text-lg mb-2">Total Questions Solved</p>
+            <h2 className="text-6xl md:text-7xl font-black">{totalCombinedSolved}</h2>
+          </div>
+
+          {/* Platform Ratings Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-6 flex-1">
+            
+            <div 
+              className={`sticker p-6 text-center cursor-pointer transition-transform duration-200 rotate-1 flex flex-col justify-center ${hoveredPlatform === 'leetcode' || clickedPlatform === 'leetcode' ? 'bg-[#FFA116]/20' : 'bg-white hover:-translate-y-1'}`}
+              onMouseEnter={() => setHoveredPlatform('leetcode')}
+              onMouseLeave={() => setHoveredPlatform(null)}
+              onClick={() => setClickedPlatform(clickedPlatform === 'leetcode' ? null : 'leetcode')}
+            >
+              <SiLeetcode size={32} color="#FFA116" className="mx-auto mb-3" />
+              <p className="text-sm font-bold opacity-70 mb-1">LeetCode Rating</p>
+              <h3 className="text-3xl font-black text-[#FFA116]">{stats.leetcode.rating}</h3>
+            </div>
+            
+            <div 
+              className={`sticker p-6 text-center cursor-pointer transition-transform duration-200 -rotate-1 flex flex-col justify-center ${hoveredPlatform === 'codeforces' || clickedPlatform === 'codeforces' ? 'bg-[#1F8ACB]/20' : 'bg-white hover:-translate-y-1'}`}
+              onMouseEnter={() => setHoveredPlatform('codeforces')}
+              onMouseLeave={() => setHoveredPlatform(null)}
+              onClick={() => setClickedPlatform(clickedPlatform === 'codeforces' ? null : 'codeforces')}
+            >
+              <SiCodeforces size={32} color="#1F8ACB" className="mx-auto mb-3" />
+              <p className="text-sm font-bold opacity-70 mb-1">Codeforces Rating</p>
+              <h3 className="text-3xl font-black text-[#1F8ACB]">{stats.codeforces.rating}</h3>
+            </div>
+
+            <div 
+              className={`sticker p-6 text-center cursor-pointer transition-transform duration-200 col-span-2 sm:col-span-1 lg:col-span-2 rotate-1 flex flex-col justify-center ${hoveredPlatform === 'codechef' || clickedPlatform === 'codechef' ? 'bg-[#D69E2E]/20' : 'bg-white hover:-translate-y-1'}`}
+              onMouseEnter={() => setHoveredPlatform('codechef')}
+              onMouseLeave={() => setHoveredPlatform(null)}
+              onClick={() => setClickedPlatform(clickedPlatform === 'codechef' ? null : 'codechef')}
+            >
+              <SiCodechef size={32} color="#D69E2E" className="mx-auto mb-3" />
+              <p className="text-sm font-bold opacity-70 mb-1">CodeChef Rating</p>
+              <h3 className="text-3xl font-black text-[#D69E2E] mb-2">{stats.codechef.rating}</h3>
+              <div className="flex justify-center gap-1">
+                {Array.from({ length: Math.max(5, codechefStarCount) }).map((_, i) => (
+                  <Star 
+                    key={i} 
+                    size={20} 
+                    fill={i < codechefStarCount ? '#D69E2E' : 'transparent'} 
+                    color={i < codechefStarCount ? '#D69E2E' : 'var(--color-ink)'} 
+                    strokeWidth={i < codechefStarCount ? 0 : 2}
+                  />
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Right Column: Dynamic Chart */}
+        <div className="flex-[2] sticker bg-white p-8 lg:min-h-[500px]">
+          {getActiveChart()}
+        </div>
+
       </div>
     </div>
   );

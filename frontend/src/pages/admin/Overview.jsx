@@ -26,34 +26,32 @@ const Overview = () => {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-      <h1 style={{ marginBottom: '2rem' }}>Dashboard Overview</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
+      <h1 className="text-4xl font-black mb-8">Dashboard Overview</h1>
+      <div className="flex flex-col gap-8">
         
         <div 
-          className="glass-card" 
-          style={{ display: 'flex', alignItems: 'center', gap: '1rem', cursor: 'pointer' }}
+          className="sticker bg-lemon p-8 flex items-center gap-6 cursor-pointer hover:-translate-y-2 transition-transform -rotate-1" 
           onClick={() => navigate('/admin/projects')}
         >
-          <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '1rem', borderRadius: '50%' }}>
-            <FileText size={24} color="var(--accent-color)" />
+          <div className="w-16 h-16 bg-white rounded-full border-2 border-[var(--color-ink)] flex items-center justify-center rotate-6">
+            <FileText size={32} />
           </div>
           <div>
-            <h3 style={{ fontSize: '2rem' }}>{stats.projects}</h3>
-            <p style={{ color: 'var(--text-secondary)' }}>Total Projects</p>
+            <h3 className="text-5xl font-black">{stats.projects}</h3>
+            <p className="font-bold opacity-80 text-lg">Total Projects</p>
           </div>
         </div>
 
         <div 
-          className="glass-card" 
-          style={{ display: 'flex', alignItems: 'center', gap: '1rem', cursor: 'pointer' }}
+          className="sticker bg-mint p-8 flex items-center gap-6 cursor-pointer hover:-translate-y-2 transition-transform rotate-1" 
           onClick={() => navigate('/admin/messages')}
         >
-          <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '1rem', borderRadius: '50%' }}>
-            <MessageSquare size={24} color="var(--accent-color)" />
+          <div className="w-16 h-16 bg-white rounded-full border-2 border-[var(--color-ink)] flex items-center justify-center -rotate-6">
+            <MessageSquare size={32} />
           </div>
           <div>
-            <h3 style={{ fontSize: '2rem' }}>{stats.messages}</h3>
-            <p style={{ color: 'var(--text-secondary)' }}>Total Messages</p>
+            <h3 className="text-5xl font-black">{stats.messages}</h3>
+            <p className="font-bold opacity-80 text-lg">Total Messages</p>
           </div>
         </div>
 

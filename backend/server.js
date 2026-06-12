@@ -11,15 +11,12 @@ const settingsRoutes = require('./routes/settingsRoutes');
 const educationRoutes = require('./routes/educationRoutes');
 const techRoutes = require('./routes/techRoutes');
 const resumeRoutes = require('./routes/resumeRoutes');
+const experienceRoutes = require('./routes/experienceRoutes');
 
 const app = express();
 
 const corsOptions = {
   origin: [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://127.0.0.1:5173',
-    'http://127.0.0.1:5174',
     process.env.FRONTEND_URL
   ].filter(Boolean), // Allow localhost variants and your production URL
   optionsSuccessStatus: 200
@@ -39,6 +36,7 @@ app.use('/api/settings', settingsRoutes);
 app.use('/api/education', educationRoutes);
 app.use('/api/tech', techRoutes);
 app.use('/api/resume', resumeRoutes);
+app.use('/api/experience', experienceRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

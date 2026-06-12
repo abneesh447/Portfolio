@@ -29,7 +29,7 @@ const MessagesViewer = () => {
         <p style={{ marginBottom: '1rem', fontWeight: 500 }}>Are you sure you want to delete this message?</p>
         <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
           <button 
-            className="btn-primary" 
+            className="sticker sticker-hover bg-coral text-white font-bold text-lg px-8 py-3 mt-4" 
             style={{ padding: '0.5rem 1rem', background: '#ef4444', fontSize: '0.9rem' }}
             onClick={async () => {
               toast.dismiss(t.id);
@@ -65,11 +65,11 @@ const MessagesViewer = () => {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <h2 style={{ marginBottom: '2rem' }}>Contact Messages</h2>
+      <h2 className="text-4xl font-black mb-8">Contact Messages</h2>
       {messages.length === 0 ? <p>No messages yet.</p> : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {messages.map(m => (
-            <div key={m._id} className="glass-card" style={{ position: 'relative' }}>
+            <div key={m._id} className="sticker bg-white p-6 md:p-8 relative" style={{ position: 'relative' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <h4>{m.name} <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>({m.email})</span></h4>
                 <button 

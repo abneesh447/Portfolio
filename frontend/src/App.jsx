@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import Projects from './pages/Projects';
+import Experience from './pages/Experience';
 import CPStats from './pages/CPStats';
+import Contact from './pages/Contact';
 import Login from './pages/admin/Login';
 import Dashboard from './pages/admin/Dashboard';
 import { Toaster } from 'react-hot-toast';
@@ -30,10 +33,13 @@ function App() {
           <Route path="*" element={
             <>
               <Navbar />
-              <main>
+              <main className="pt-32 pb-20 min-h-screen">
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/projects" element={<Projects />} />
+                  <Route path="/experience" element={<Experience />} />
                   <Route path="/cp" element={<CPStats />} />
+                  <Route path="/contact" element={<Contact />} />
                 </Routes>
               </main>
               <Footer />

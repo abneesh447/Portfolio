@@ -47,9 +47,9 @@ const ResumeManager = () => {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <h2 style={{ marginBottom: '2rem' }}>Manage Resume</h2>
+      <h2 className="text-4xl font-black mb-8">Manage Resume</h2>
       
-      <div className="glass-card" style={{ maxWidth: '600px' }}>
+      <div className="sticker bg-white p-6 md:p-8 relative w-full">
         <p style={{ marginBottom: '1.5rem', color: 'var(--text-secondary)' }}>
           Upload your latest PDF resume here. It will be securely stored in the database and automatically served to visitors who click the "Download CV" button on your homepage.
         </p>
@@ -68,7 +68,7 @@ const ResumeManager = () => {
             accept="application/pdf" 
             style={{ display: 'none' }} 
             onChange={handleFileChange}
-          />
+           className="w-full border-2 border-[var(--color-ink)] rounded-xl px-4 py-3 bg-cream focus:bg-white focus:outline-none focus:shadow-[4px_4px_0_0_var(--color-ink)] transition-all font-medium" />
           {file ? (
             <div style={{ color: 'var(--accent-color)' }}>
               <File size={48} style={{ margin: '0 auto 1rem auto' }} />
@@ -85,7 +85,7 @@ const ResumeManager = () => {
         </div>
 
         <button 
-          className="btn-primary" 
+          className="sticker sticker-hover bg-coral text-white font-bold text-lg px-8 py-3 mt-4" 
           onClick={handleUpload} 
           disabled={!file || isUploading}
           style={{ width: '100%', opacity: (!file || isUploading) ? 0.5 : 1 }}

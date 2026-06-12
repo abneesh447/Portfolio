@@ -27,40 +27,42 @@ const Login = () => {
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }} 
         animate={{ opacity: 1, scale: 1 }} 
-        className="glass-card" 
+        className="sticker bg-white p-6 md:p-8 relative" 
         style={{ width: '100%', maxWidth: '400px' }}
       >
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div style={{ background: 'rgba(16, 185, 129, 0.1)', display: 'inline-block', padding: '1rem', borderRadius: '50%', marginBottom: '1rem' }}>
-            <Lock size={32} color="var(--accent-color)" />
+        <div className="text-center mb-8">
+          <div className="w-20 h-20 mx-auto bg-lemon rounded-full border-2 border-[var(--color-ink)] shadow-[4px_4px_0_0_var(--color-ink)] flex items-center justify-center mb-6 -rotate-3 hover:rotate-3 transition-transform">
+            <Lock size={36} className="text-[var(--color-ink)]" />
           </div>
-          <h2>Admin Login</h2>
+          <h2 className="text-4xl font-black">Admin Login</h2>
         </div>
         
         {error && <p style={{ color: '#ef4444', textAlign: 'center', marginBottom: '1rem' }}>{error}</p>}
         
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="username" className="block font-bold mb-2 text-left">Username</label>
             <input 
               type="text" 
               id="username" 
               value={username} 
               onChange={(e) => setUsername(e.target.value)} 
-              placeholder="Admin Username" 
+              placeholder="Admin Username"
+              className="w-full border-2 border-[var(--color-ink)] rounded-xl px-4 py-3 bg-cream focus:outline-none focus:bg-white focus:shadow-[4px_4px_0_0_var(--color-ink)] transition-all font-medium"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
+          <div>
+            <label htmlFor="password" className="block font-bold mb-2 text-left">Password</label>
             <input 
               type="password" 
               id="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              placeholder="••••••••" 
+              placeholder="••••••••"
+              className="w-full border-2 border-[var(--color-ink)] rounded-xl px-4 py-3 bg-cream focus:outline-none focus:bg-white focus:shadow-[4px_4px_0_0_var(--color-ink)] transition-all font-medium"
             />
           </div>
-          <button type="submit" className="btn-primary" style={{ width: '100%' }}>
+          <button type="submit" className="w-full sticker sticker-hover bg-coral text-white font-bold text-lg py-4 mt-2">
             Login to Dashboard
           </button>
         </form>
