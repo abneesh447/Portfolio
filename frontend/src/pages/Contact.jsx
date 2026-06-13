@@ -81,7 +81,7 @@ const Contact = () => {
               </div>
               <span className="font-bold group-hover:translate-x-2 transition-transform text-[var(--color-ink)]">→</span>
             </a>
-            <a href="https://github.com/abneeshpatel9" target="_blank" rel="noreferrer" className="sticker sticker-hover bg-mint px-6 py-4 flex-1 flex items-center justify-between group !rounded-full">
+            <a href="https://github.com/abneesh447" target="_blank" rel="noreferrer" className="sticker sticker-hover bg-mint px-6 py-4 flex-1 flex items-center justify-between group !rounded-full">
               <div className="flex items-center gap-4">
                 <FaGithub size={24} className="text-[var(--color-ink)]" />
                 <span className="font-bold text-lg text-[var(--color-ink)]">GitHub</span>
