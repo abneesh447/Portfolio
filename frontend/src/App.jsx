@@ -22,7 +22,7 @@ function App() {
     <Router>
       <Toaster position="top-right" />
       <Analytics />
-      <div className="app-container">
+      <div className="app-container overflow-x-hidden w-full">
         <Routes>
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin/*" element={

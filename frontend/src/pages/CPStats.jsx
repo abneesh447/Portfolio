@@ -88,13 +88,13 @@ const CPStats = () => {
       return (
         <div className="h-full flex flex-col">
           <h3 className="text-xl font-bold text-center mb-6">Questions Solved (Difficulty)</h3>
-          <div className="flex-grow min-h-[300px]">
+          <div className="w-full h-[300px] md:h-[400px]">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie 
                   data={pieData} 
-                  innerRadius={70} 
-                  outerRadius={110} 
+                  innerRadius="45%" 
+                  outerRadius="75%" 
                   paddingAngle={5} 
                   dataKey="value"
                   startAngle={90}
@@ -114,7 +114,7 @@ const CPStats = () => {
                   verticalAlign="bottom" 
                   height={36} 
                   content={() => (
-                    <ul className="flex justify-center gap-6 font-bold">
+                    <ul className="flex justify-center gap-3 md:gap-6 font-bold text-sm md:text-base">
                       <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full border-2 border-[var(--color-ink)]" style={{backgroundColor: '#00b8a3'}}></div>Easy</li>
                       <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full border-2 border-[var(--color-ink)]" style={{backgroundColor: '#ffc01e'}}></div>Medium</li>
                       <li className="flex items-center gap-2"><div className="w-4 h-4 rounded-full border-2 border-[var(--color-ink)]" style={{backgroundColor: '#ff375f'}}></div>Hard</li>
@@ -149,12 +149,12 @@ const CPStats = () => {
     return (
       <div className="h-full flex flex-col">
         <h3 className="text-xl font-bold text-center mb-6 capitalize">{activeChart} Rating</h3>
-        <div className="flex-grow min-h-[300px]">
+        <div className="w-full h-[300px] md:h-[400px]">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={platformData.ratingHistory} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)" />
-              <XAxis dataKey="contest" stroke="var(--color-ink)" tick={{fontSize: 12, fontWeight: 'bold'}} />
-              <YAxis stroke="var(--color-ink)" domain={['dataMin - 100', 'dataMax + 100']} tick={{fontWeight: 'bold'}} />
+              <XAxis dataKey="contest" stroke="var(--color-ink)" tick={{fontSize: 12, fontWeight: 'bold'}} tickMargin={10} />
+              <YAxis stroke="var(--color-ink)" domain={['dataMin - 100', 'dataMax + 100']} tick={{fontWeight: 'bold', fontSize: 12}} width={40} />
               <RechartsTooltip content={<CustomTooltip />} cursor={{ stroke: 'var(--color-ink)', strokeWidth: 2, strokeDasharray: '5 5' }} />
               <Line type="stepAfter" dataKey="rating" stroke={color} strokeWidth={4} dot={{ r: 5, fill: color, stroke: 'var(--color-ink)', strokeWidth: 2 }} activeDot={{ r: 8, stroke: 'var(--color-ink)', strokeWidth: 2 }} />
             </LineChart>
@@ -274,7 +274,7 @@ const CPStats = () => {
         </div>
 
         {/* Right Column: Dynamic Chart */}
-        <div className="flex-[2] sticker bg-white p-8 lg:min-h-[500px]">
+        <div className="flex-[2] sticker bg-white p-4 sm:p-8 lg:min-h-[500px]">
           {getActiveChart()}
         </div>
 

@@ -53,19 +53,19 @@ const Contact = () => {
             <h3 className="text-2xl font-bold mb-6">Contact Info</h3>
             <div className="space-y-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-[var(--color-ink)]">
+                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-[var(--color-ink)] shrink-0">
                   <Mail className="text-[var(--color-ink)]" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="font-bold opacity-70 text-sm">Email</p>
-                  <p className="font-bold text-lg">abneeshpatel9@gmail.com</p>
+                  <p className="font-bold text-base sm:text-lg break-all">abneeshpatel9@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-[var(--color-ink)]">
+                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-[var(--color-ink)] shrink-0">
                   <MapPin className="text-[var(--color-ink)]" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="font-bold opacity-70 text-sm">Location</p>
                   <p className="font-bold text-lg">Earth</p>
                 </div>
@@ -74,21 +74,21 @@ const Contact = () => {
           </div>
 
           <div className="flex flex-col gap-4 flex-[2]">
-            <a href="#" className="sticker sticker-hover bg-sky px-6 py-4 flex-1 flex items-center justify-between group !rounded-full">
+            <a href="https://linkedin.com/in/abneeshpatel9" target="_blank" rel="noreferrer" className="sticker sticker-hover bg-sky px-6 py-4 flex-1 flex items-center justify-between group !rounded-full">
               <div className="flex items-center gap-4">
                 <FaLinkedin size={24} className="text-[var(--color-ink)]" />
                 <span className="font-bold text-lg text-[var(--color-ink)]">LinkedIn</span>
               </div>
               <span className="font-bold group-hover:translate-x-2 transition-transform text-[var(--color-ink)]">→</span>
             </a>
-            <a href="#" className="sticker sticker-hover bg-mint px-6 py-4 flex-1 flex items-center justify-between group !rounded-full">
+            <a href="https://github.com/abneeshpatel9" target="_blank" rel="noreferrer" className="sticker sticker-hover bg-mint px-6 py-4 flex-1 flex items-center justify-between group !rounded-full">
               <div className="flex items-center gap-4">
                 <FaGithub size={24} className="text-[var(--color-ink)]" />
                 <span className="font-bold text-lg text-[var(--color-ink)]">GitHub</span>
               </div>
               <span className="font-bold group-hover:translate-x-2 transition-transform text-[var(--color-ink)]">→</span>
             </a>
-            <a href="#" className="sticker sticker-hover bg-lavender px-6 py-4 flex-1 flex items-center justify-between group !rounded-full">
+            <a href="https://twitter.com/abneeshpatel9" target="_blank" rel="noreferrer" className="sticker sticker-hover bg-lavender px-6 py-4 flex-1 flex items-center justify-between group !rounded-full">
               <div className="flex items-center gap-4">
                 <FaTwitter size={24} className="text-[var(--color-ink)]" />
                 <span className="font-bold text-lg text-[var(--color-ink)]">Twitter</span>
